@@ -9,6 +9,11 @@
   "author": "Serhii",
   "license": "ISC",
   "devDependencies": {
+    "@babel/core": "^7.20.2",
+    "@babel/plugin-proposal-class-properties": "^7.18.6",
+    "@babel/plugin-proposal-private-methods": "^7.18.6",
+    "@babel/plugin-syntax-class-properties": "^7.12.13",
+    "@parcel/transformer-sass": "^2.8.0",
     "parcel": "^2.0.0-beta.1",
     "sass": "^1.26.10"
   },
