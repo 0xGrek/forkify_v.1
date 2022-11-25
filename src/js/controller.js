@@ -1,35 +1,50 @@
-import * as model from './model';
-import recipeView from './views/recipeView';
+import * as model from "./model";
+import recipeView from "./views/recipeView";
+import searchView from "./views/searchView";
 
-import 'core-js/stable';
-import 'regenerator-runtime/runtime';
+import "core-js/stable";
+import "regenerator-runtime/runtime";
+import { async } from "regenerator-runtime";
 
-const recipeContainer = document.querySelector('.recipe');
-
-// https://forkify-api.herokuapp.com/v2
-
-///////////////////////////////////////
 const constrolRecipes = async function () {
-  try {
-    const id = window.location.hash.slice(1);
-    console.log(id);
+    try {
+        const id = window.location.hash.slice(1);
+        console.log(id);
 
-    if (!id) return;
-    recipeView.renderSpiner(recipeContainer);
+        if (!id) return;
+        recipeView.renderSpiner();
 
-    // 1) Loading recipe
-    await model.loadRecipe(id);
+        // 1) Loading recipe
+        await model.loadRecipe(id);
 
-    // 2) Loading recipe
-    recipeView.render(model.state.recipe);
-    // const recipeView = new recipeView(model.state.recipe);
-  } catch (err) {
-    recipeView.renderError();
-  }
+        // 2) Loading recipe
+        recipeView.render(model.state.recipe);
+        // const recipeView = new recipeView(model.state.recipe);
+    } catch (err) {
+        recipeView.renderError();
+    }
 };
-constrolRecipes();
+// constrolRecipes();
 
+const controlSearchResults = async function () {
+    try {
+        // 1) get search query
+        const query = searchView.getQuery();
+        if (!query) return;
+
+        // 2) Load search results
+        await model.loadSearchResults(query);
+
+        // 3) Render results
+        console.log(model.state.recipe);
+    } catch (err) {
+        console.error(err);
+    }
+};
+
+controlSearchResults();
 const init = function () {
-  recipeView.addHandlerRender(constrolRecipes);
+    recipeView.addHandlerRender(constrolRecipes);
+    searchView.addHandlerSearch(controlSearchResults);
 };
 init();
