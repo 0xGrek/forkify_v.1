@@ -40,6 +40,7 @@ const controlSearchResults = async function () {
 
         // 3) Render results
         console.log(model.state.recipe);
+        resultsView.render(model.state.recipe);
     } catch (err) {
         console.error(err);
     }
