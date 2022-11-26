@@ -2,6 +2,10 @@ import icons from "url:../../img/icons.svg"; //Parcel 2
 
 export default class View {
     render(data) {
+        // проверка если масив пустой
+        if (!data || (Array.isArray(data) && data.length === 0))
+            return this.renderError();
+
         this._data = data;
         const markup = this._generateMarkup();
         this._clear();
