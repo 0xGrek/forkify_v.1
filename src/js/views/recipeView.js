@@ -9,8 +9,8 @@ class RecipeView extends View {
     _message = "";
 
     addHandlerRender(handler) {
-        // window.addEventListener(`hashchange`, constrolRecipes);
-        // window.addEventListener(`load`, constrolRecipes);
+        // window.addEventListener(`hashchange`, controlRecipes);
+        // window.addEventListener(`load`, controlRecipes);
         ["hashchange", "load"].forEach((ev) =>
             window.addEventListener(ev, handler)
         );

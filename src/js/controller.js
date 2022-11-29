@@ -12,7 +12,7 @@ if (module.hot) {
     module.hot.accept();
 }
 
-const constrolRecipes = async function () {
+const controlRecipes = async function () {
     try {
         const id = window.location.hash.slice(1);
         console.log(id);
@@ -30,7 +30,7 @@ const constrolRecipes = async function () {
         recipeView.renderError();
     }
 };
-// constrolRecipes();
+// controlRecipes();
 
 const controlSearchResults = async function () {
     try {
@@ -45,7 +45,7 @@ const controlSearchResults = async function () {
 
         // 3) Render results
         // resultsView.render(model.state.search.results);
-        resultsView.render(model.getSearchResultPage(6));
+        resultsView.render(model.getSearchResultPage(4));
 
         // 4)Initial pagination buttons
         paginationView.render(model.state.search);
@@ -54,9 +54,14 @@ const controlSearchResults = async function () {
     }
 };
 
+const controlPagination = function () {
+    console.log(`Pag controler`);
+};
+
 controlSearchResults();
 const init = function () {
-    recipeView.addHandlerRender(constrolRecipes);
+    recipeView.addHandlerRender(controlRecipes);
     searchView.addHandlerSearch(controlSearchResults);
+    paginationView.addHandlerClick(controlPagination);
 };
 init();
