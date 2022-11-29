@@ -7,13 +7,12 @@ class ResultsView extends View {
     _message = "";
 
     _generateMarkup() {
-        console.log(this._data);
         return this._data.map(this._generateMarkupPreview).join("");
     }
 
     _generateMarkupPreview(result) {
         const id = window.location.hash.slice(1);
-        console.log(id);
+
         return `
          <li class="preview">
             <a class="preview__link ${

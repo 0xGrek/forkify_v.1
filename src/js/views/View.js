@@ -49,7 +49,6 @@ export default class View {
     }
 
     renderSpiner() {
-        console.log(this._data);
         const markup = `
   <div class="spinner">
     <svg>
