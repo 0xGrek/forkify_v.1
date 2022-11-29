@@ -61,7 +61,7 @@ export const getSearchResultPage = function (page = state.search.page) {
 
     // trust use
     const start = (page - 1) * state.search.resultsPerPage; //0;
-    const end = page * state.search.resultsPerPage; //9;
+    const end = page * state.search.resultsPerPage; //10;
 
     return state.search.results.slice(start, end);
 };
