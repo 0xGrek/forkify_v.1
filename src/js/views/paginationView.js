@@ -41,7 +41,7 @@ class PaginationView extends View {
                 <span>Page ${curPage - 1}</span>
             </button>
         `;
-
+        console.log(numPages);
         // Page 1 and there are other pages
         if (curPage === 1 && numPages > 1) {
             return btnRigth;

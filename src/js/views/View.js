@@ -7,6 +7,7 @@ export default class View {
             return this.renderError();
 
         this._data = data;
+        console.log(data);
         const markup = this._generateMarkup();
         this._clear();
         this._parentElement.insertAdjacentHTML(`afterbegin`, markup);
@@ -49,6 +50,7 @@ export default class View {
     }
 
     renderSpiner() {
+        console.log(this._data);
         const markup = `
   <div class="spinner">
     <svg>
