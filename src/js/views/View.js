@@ -32,7 +32,7 @@ export default class View {
             // Updates  chanced TEXT
             if (
                 !newEl.isEqualNode(curEl) &&
-                newEl.firstChild.nodeValue.trim() !== ""
+                newEl.firstChild?.nodeValue.trim() !== ""
             ) {
                 // console.log("💢", newEl.firstChild.nodeValue.trim());
                 curEl.textContent = newEl.textContent;
@@ -50,7 +50,6 @@ export default class View {
     }
 
     renderSpiner() {
-        console.log(this._data);
         const markup = `
   <div class="spinner">
     <svg>
