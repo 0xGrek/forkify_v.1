@@ -76,9 +76,14 @@ const controlServings = function (newServings) {
 
 const controlAddBookmark = function () {
     model.addBookmark(model.state.recipe);
-    console.log(model.state.recipe);
+    // console.log(model.state.recipe);
     recipeView.update(model.state.recipe);
 };
+// const controlAddBookmark = function () {
+//   model.toggleBookmark();
+//   console.log(model.state.recipe);
+//   recipeView.update(model.state.recipe);
+// };
 
 controlSearchResults();
 const init = function () {
