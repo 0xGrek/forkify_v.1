@@ -69,12 +69,12 @@ body {
         border-radius: 0;
     }
 }
+
 @media (max-width: 767px) {
     .container {
-        display: inline;
+        display: inline-block;
         .header {
-            display: inline-block;
-
+            display: inline;
             &__logo {
                 margin: 1rem auto;
             }
@@ -85,22 +85,76 @@ body {
         .nav {
             display: block;
             margin: 0 auto;
-            // align-items: center;
-            // align-content: center;
+            &__list {
+                justify-content: space-around;
+                margin: auto auto;
+            }
         }
         .recipe {
             &__title {
                 font-size: 2.25rem;
-                transform: translate(-50%, -50%) skewY(-6deg);
+                transform: translate(-50%, -300%) skewY(-6deg);
             }
             &__details {
-                display: inline-block;
+                padding: 6rem 3rem 3.5rem;
             }
             &__ingredient-list {
                 display: inline;
             }
             &__directions {
                 padding: 2rem 0;
+            }
+
+            .btn--round {
+                display: block;
+                margin: 0 auto;
+            }
+        }
+    }
+}
+
+@media (max-width: 424px) {
+    .container {
+        display: inline-block;
+        .header {
+            display: inline;
+            &__logo {
+                margin: 1rem auto;
+            }
+        }
+        .search {
+            margin: 2rem 0;
+        }
+        .nav {
+            display: block;
+            margin: 0 auto;
+            &__list {
+                justify-content: space-around;
+                margin: auto auto;
+            }
+        }
+        .recipe {
+            &__title {
+                font-size: 2.25rem;
+                transform: translate(-50%, -110%) skewY(-6deg);
+            }
+            &__details {
+                display: grid;
+                grid-template-columns: 1fr;
+            }
+            &__ingredient-list {
+                display: inline;
+            }
+            &__directions {
+                padding: 2rem 0;
+            }
+            &__user-generated {
+                display: block;
+                margin: 1rem auto;
+            }
+            .btn--round {
+                display: block;
+                margin: 0 auto;
             }
         }
     }
