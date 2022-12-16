@@ -34,9 +34,6 @@ export const loadRecipe = async function (id) {
         if (state.bookmarks.some((bookmark) => bookmark.id === id))
             state.recipe.bookmarked = true;
         else state.recipe.bookmarked = false;
-
-        console.log(state.bookmarks);
-        console.log(state.recipe);
     } catch (err) {
         console.error(`${err} 👀`);
         throw err;
@@ -95,9 +92,12 @@ export const addBookmark = function (recipe) {
 };
 
 export const deleteBookmark = function (id) {
-    // delete bookmark
+    // delete bookmarkl
+    console.log(id);
+
     const index = state.bookmarks.findIndex((el) => el.id === id);
     state.bookmarks.splice(id, 1);
+
     console.log(index);
 
     // Mark curretn reipe as NOT bookmark
