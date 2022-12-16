@@ -31,14 +31,12 @@ export const loadRecipe = async function (id) {
             ingredients: recipe.ingredients,
         };
         //PROBLEM
-        if(state.bookmarks.map(bm => bm.id === id))
+        if (state.bookmarks.some((bookmark) => bookmark.id === id))
             state.recipe.bookmarked = true;
         else state.recipe.bookmarked = false;
-    //     state.bookmarks.map(bm => {
-    //   if (bm.id === state.recipe.id) state.recipe.bookmarked = bm.bookmarked;
-    // });
-    console.log(state.bookmarks)
-        console.log(state.recipe)
+
+        console.log(state.bookmarks);
+        console.log(state.recipe);
     } catch (err) {
         console.error(`${err} 👀`);
         throw err;
@@ -61,8 +59,8 @@ export const loadSearchResults = async function (query) {
         });
         // refresh the page will always be 1
         state.search.page = 1;
-        console.log(state.search.results);
-        console.log(state.recipe.id);
+        // console.log(state.search.results);
+        // console.log(state.recipe.id);
     } catch (err) {
         console.error(`${err} 👀`);
         throw err;
@@ -90,17 +88,18 @@ export const updateServings = function (newServings) {
 
 export const addBookmark = function (recipe) {
     // Add bookmark
-    state.bookmarks.push.recipe;
+    state.bookmarks.push(recipe);
     console.log(recipe);
     // Mark curretn reipe as bookmark
     if (recipe.id === state.recipe.id) state.recipe.bookmarked = true;
 };
 
-export const deleteBookmark = function(id) {
-    const index = state.bookmarks.findIndex(el => el.id === id)
-    state.bookmarks.splice(index, 1)
-    
-        // Mark curretn reipe as bookmark
-    if (recipe.id === state.recipe.id) state.recipe.bookmarked = true;
+export const deleteBookmark = function (id) {
+    // delete bookmark
+    const index = state.bookmarks.findIndex((el) => el.id === id);
+    state.bookmarks.splice(id, 1);
+    console.log(index);
 
-}
+    // Mark curretn reipe as NOT bookmark
+    if (id === state.recipe.id) state.recipe.bookmarked = false;
+};
