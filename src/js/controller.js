@@ -1,4 +1,5 @@
 import * as model from "./model";
+import { MODAL_CLOSE_SEC } from "./config";
 import recipeView from "./views/recipeView";
 import searchView from "./views/searchView";
 import resultsView from "./views/resultsView";
@@ -40,12 +41,11 @@ const controlRecipes = async function () {
 
 const controlSearchResults = async function () {
     try {
-        resultsView.renderSpiner();
-
         // 1)Get search query
         const query = searchView.getQuery();
         if (!query) return;
 
+        resultsView.renderSpiner();
         // 2) Load search results
         await model.loadSearchResults(query);
 
@@ -95,9 +95,24 @@ const controlBookmarks = function () {
 
 const controlAddRecipe = async function (newRecipe) {
     try {
+        // Show  loading spinner
+        addRecipeView.renderSpiner();
+
         console.log(newRecipe);
         // Upload the new recipe data
         await model.uploadRecipe(newRecipe);
+        console.log(model.state.recipe);
+
+        // Render recipe
+        recipeView.render(model.state.recipe);
+
+        // Success message
+        addRecipeView.renderMessage();
+
+        // Close form window
+        setTimeout(function () {
+            addRecipeView.toggleWindow();
+        }, MODAL_CLOSE_SEC * 1000);
     } catch (err) {
         console.error("💥, err");
         addRecipeView.renderError(err.message);
