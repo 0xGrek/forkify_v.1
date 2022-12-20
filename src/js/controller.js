@@ -98,10 +98,8 @@ const controlAddRecipe = async function (newRecipe) {
         // Show  loading spinner
         addRecipeView.renderSpiner();
 
-        console.log(newRecipe);
         // Upload the new recipe data
         await model.uploadRecipe(newRecipe);
-        console.log(model.state.recipe);
 
         // Render recipe
         recipeView.render(model.state.recipe);
@@ -109,14 +107,30 @@ const controlAddRecipe = async function (newRecipe) {
         // Success message
         addRecipeView.renderMessage();
 
+        // Render bookmark wview
+        bookmarksView.render(model.state.bookmarks);
+
+        // Change Id in URL
+        window.history.pushState(null, "", `#${model.state.recipe.id}`);
+
         // Close form window
         setTimeout(function () {
-            addRecipeView.toggleWindow();
+            addRecipeView._closeWindow();
         }, MODAL_CLOSE_SEC * 1000);
+        /*
+        setTimeout(() => {
+            addRecipeView._closeWindow();
+        }, MODAL_CLOSE_SEC * 300);
+        setTimeout(() => {
+            addRecipeView.render(model.state.recipe);
+            addRecipeView._closeWindow();
+        }, MODAL_CLOSE_SEC * 100);
+        */
     } catch (err) {
         console.error("💥, err");
         addRecipeView.renderError(err.message);
     }
+    location.reload();
 };
 
 controlSearchResults();
