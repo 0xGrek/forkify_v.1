@@ -1,6 +1,15 @@
 import icons from "url:../../img/icons.svg"; //Parcel 2
 
 export default class View {
+    _data;
+    /**
+     * render the recived object ot the DOM
+     * @param {Object | Object[]} data The data to be rendered (e.g. recipe)
+     * @param {boolean} [render= true] if false, creatr markup string instead of rendering to the DOM.
+     * @returns {undefined | string }  A markup string is returned if render = false
+     * @this {Object} Viev instance
+     * @todo Finish implementation
+     */
     render(data, render = true) {
         // check if array is empty
         if (!data || (Array.isArray(data) && data.length === 0))
@@ -28,7 +37,6 @@ export default class View {
 
         newElements.forEach((newEl, i) => {
             const curEl = curElements[i];
-            // console.log(curEl, newEl.isEqualNode(curEl));
 
             // Updates  chanced TEXT
             if (

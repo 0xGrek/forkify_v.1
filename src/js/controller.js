@@ -114,23 +114,14 @@ const controlAddRecipe = async function (newRecipe) {
         window.history.pushState(null, "", `#${model.state.recipe.id}`);
 
         // Close form window
-        setTimeout(function () {
+        setTimeout(() => {
             addRecipeView._closeWindow();
+            location.reload();
         }, MODAL_CLOSE_SEC * 1000);
-        /*
-        setTimeout(() => {
-            addRecipeView._closeWindow();
-        }, MODAL_CLOSE_SEC * 300);
-        setTimeout(() => {
-            addRecipeView.render(model.state.recipe);
-            addRecipeView._closeWindow();
-        }, MODAL_CLOSE_SEC * 100);
-        */
     } catch (err) {
         console.error("💥, err");
         addRecipeView.renderError(err.message);
     }
-    location.reload();
 };
 
 controlSearchResults();

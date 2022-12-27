@@ -33,7 +33,7 @@ const createRecipeObject = function (data) {
 export const loadRecipe = async function (id) {
     try {
         const data = await AJAX(`${API_URL}${id}?key=${KEY}`);
-        console.log(data);
+
         // reformat
         state.recipe = createRecipeObject(data);
         //PROBLEM
@@ -51,7 +51,6 @@ export const loadSearchResults = async function (query) {
         state.search.query = query;
 
         const data = await AJAX(`${API_URL}?search=${query}&key=${KEY}`);
-        console.log(data);
 
         state.search.results = data.data.recipes.map((rec) => {
             return {
@@ -64,8 +63,6 @@ export const loadSearchResults = async function (query) {
         });
         // refresh the page will always be 1
         state.search.page = 1;
-        // console.log(state.search.results);
-        // console.log(state.recipe.id);
     } catch (err) {
         console.error(`${err} 👀`);
         throw err;
@@ -98,7 +95,7 @@ export const presistBokmarks = function () {
 export const addBookmark = function (recipe) {
     // Add bookmark
     state.bookmarks.push(recipe);
-    console.log(recipe);
+    ;
     // Mark curretn reipe as bookmark
     if (recipe.id === state.recipe.id) state.recipe.bookmarked = true;
 
@@ -106,9 +103,7 @@ export const addBookmark = function (recipe) {
 };
 
 export const deleteBookmark = function (id) {
-    // delete bookmarkl
-    console.log(id);
-
+    // delete bookmark
     const index = state.bookmarks.findIndex((el) => el.id === id);
     state.bookmarks.splice(id, 1);
 
@@ -124,7 +119,7 @@ const init = function () {
     if (storage) state.bookmarks = JSON.parse(storage);
 };
 init();
-// console.log(state.bookmarks);
+
 
 const clearBookmarks = function () {
     localStorage.clear("bookmarks");
@@ -138,7 +133,8 @@ export const uploadRecipe = async function (newRecipe) {
                 (entry) => entry[0].startsWith("ingredient") && entry[1] !== ""
             )
             .map((ing) => {
-                const ingArr = ing[1].replaceAll(" ", "").split(",");
+                const ingArr = ing[1].split(",").map((el) => el.trim());
+                // const ingArr = ing[1].replaceAll(" ", "").split(",");
                 if (ingArr.length !== 3)
                     throw new Error(
                         `Wrong ingredient format! Please corect format`
@@ -151,7 +147,6 @@ export const uploadRecipe = async function (newRecipe) {
                     description,
                 };
             });
-        console.log(ingredients);
 
         const recipe = {
             title: newRecipe.title,
@@ -164,7 +159,7 @@ export const uploadRecipe = async function (newRecipe) {
         };
 
         const data = await AJAX(`${API_URL}?key=${KEY}`, recipe);
-        console.log(data);
+
         state.recipe = createRecipeObject(data);
         addBookmark(state.recipe);
     } catch (err) {

@@ -115,7 +115,7 @@ body {
 
 @media (max-width: 424px) {
     .container {
-        display: inline-block;
+        // display: inline-block;gulp
         .header {
             display: inline;
             &__logo {
@@ -156,6 +156,9 @@ body {
                 display: block;
                 margin: 0 auto;
             }
+        }
+        .add-recipe-window {
+            width: 30rem;
         }
     }
 }
